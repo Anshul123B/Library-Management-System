@@ -1,35 +1,6 @@
 # Library Management System
 
-A full-stack web application for managing library operations, including book inventory, member management, issue tracking, and membership handling.
-
-## Project Overview
-
-This Library Management System is built with:
-- **Frontend**: React.js with modern UI components
-- **Backend**: Node.js with Express.js
-- **Database**: MongoDB
-- **Authentication**: JWT (JSON Web Tokens)
-
-## Features
-
-- User authentication and authorization
-- Book management (browse, add, update, delete)
-- Issue tracking (issue and return books)
-- Member management
-- Membership handling
-- Movie management
-- Admin dashboard with reports
-- Transaction history
-- Responsive UI
-
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- **Node.js** (v14 or higher)
-- **npm** or **yarn** - comes with Node.js
-- **MongoDB** 
-- **Git** 
+A full-stack web application for managing library operations, including book inventory, member management, issue tracking, and membership handling. 
 
 ## Local Setup Instructions
 
