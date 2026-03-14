@@ -33,7 +33,8 @@ const BookManagement = () => {
     }
   };
 
-  useEffect(() => {\n    const delayDebounceFn = setTimeout(() => {
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
       fetchBooks();
     }, 500);
     return () => clearTimeout(delayDebounceFn);

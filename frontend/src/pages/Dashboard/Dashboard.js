@@ -27,9 +27,11 @@ const Dashboard = () => {
           const res = await reportService.getDashboard();
           console.log('Dashboard stats:', res.data.data);
           setStats(res.data.data);
-        } else {\n          const [booksRes, issuesRes] = await Promise.all([
+        } else {
+          const [booksRes, issuesRes] = await Promise.all([
             bookService.getAll({ limit: 5 }),
-            issueService.getAll({ status: 'issued' })\n          ]);
+            issueService.getAll({ status: 'issued' })
+          ]);
           setStats({
             recentBooks: booksRes.data.data.slice(0, 5)
           });
