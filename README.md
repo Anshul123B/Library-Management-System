@@ -26,10 +26,10 @@ This Library Management System is built with:
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v14 or higher) - [Download](https://nodejs.org/)
+- **Node.js** (v14 or higher)
 - **npm** or **yarn** - comes with Node.js
-- **MongoDB** - [Download](https://www.mongodb.com/try/download/community) or use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- **Git** - [Download](https://git-scm.com/)
+- **MongoDB** 
+- **Git** 
 
 ## Local Setup Instructions
 
