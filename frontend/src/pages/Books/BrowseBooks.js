@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { bookService } from '../../services/dataService';
-import { FiSearch, FiBook, FiUser, FiMapPin } from 'react-icons/fi';
+import { FiSearch, FiBook, FiUser, FiMapPin, FiArrowRight } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import './BrowseBooks.css';
 
 const BrowseBooks = () => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,6 +64,10 @@ const BrowseBooks = () => {
 
   const handleCategoryChange = (e) => {
     setCategoryFilter(e.target.value);
+  };
+
+  const handleIssueBook = (bookId) => {
+    navigate('/issue-book', { state: { selectedBookId: bookId } });
   };
 
   if (loading) {
@@ -153,7 +159,14 @@ const BrowseBooks = () => {
 
             <div className="book-card-footer">
               {book.availableCopies > 0 ? (
-                <span className="book-status-text">Available to Issue</span>
+                <button 
+                  className="book-issue-btn"
+                  onClick={() => handleIssueBook(book._id)}
+                  title="Click to issue this book"
+                >
+                  <span>Available to Issue</span>
+                  <FiArrowRight className="btn-icon" />
+                </button>
               ) : (
                 <span className="book-status-text unavailable">Currently Unavailable</span>
               )}

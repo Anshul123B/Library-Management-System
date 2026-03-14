@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { issueService, bookService, userService, membershipService } from '../../services/dataService';
 import { FiSend, FiCheckCircle, FiSearch, FiAward } from 'react-icons/fi';
 import { toast } from 'react-toastify';
@@ -6,6 +7,7 @@ import { useAuth } from '../../context/AuthContext';
 
 const IssueBook = () => {
   const { isAdmin, user } = useAuth();
+  const location = useLocation();
   const [users, setUsers] = useState([]);
   const [books, setBooks] = useState([]);
   const [memberships, setMemberships] = useState([]);
@@ -34,7 +36,12 @@ const IssueBook = () => {
     }
     fetchBooks();
     fetchMemberships();
-  }, [isAdmin, user]);
+
+    // Pre-select book if coming from BrowseBooks
+    if (location.state?.selectedBookId) {
+      setSelectedBook(location.state.selectedBookId);
+    }
+  }, [isAdmin, user, location]);
 
   const fetchUsers = async () => {
     try {
