@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { issueService } from '../../services/dataService';
 import { FiRotateCcw, FiSearch, FiAlertTriangle, FiCheck } from 'react-icons/fi';
 import { toast } from 'react-toastify';
-import { useAuth } from '../../context/AuthContext';
 
 const ReturnBook = () => {
-  const { isAdmin, user } = useAuth();
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');

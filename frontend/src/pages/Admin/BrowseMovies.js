@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { movieService } from '../../services/dataService';
 import { FiSearch, FiFilm } from 'react-icons/fi';
 import { toast } from 'react-toastify';
@@ -10,7 +10,7 @@ const BrowseMovies = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const fetchMovies = async () => {
+  const fetchMovies = useCallback(async () => {
     try {
       setLoading(true);
       const res = await movieService.getAll({ limit: 1000 });
@@ -23,7 +23,7 @@ const BrowseMovies = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm]);
 
   const filterMovies = (moviesToFilter, search) => {
     let filtered = moviesToFilter;
@@ -41,7 +41,7 @@ const BrowseMovies = () => {
 
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, [fetchMovies]);
 
   useEffect(() => {
     filterMovies(movies, searchTerm);

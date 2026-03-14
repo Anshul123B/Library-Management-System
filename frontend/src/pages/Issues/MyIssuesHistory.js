@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { issueService } from '../../services/dataService';
-import { useAuth } from '../../context/AuthContext';
 import { FiClock, FiCheckCircle, FiAlertTriangle, FiBook } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import './MyIssuesHistory.css';
 
 const MyIssuesHistory = () => {
-  const { user } = useAuth();
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('all');
 
-  useEffect(() => {
-    fetchIssues();
-  }, []);
-
-  const fetchIssues = async () => {
+  const fetchIssues = useCallback(async () => {
     try {
       setLoading(true);
       const res = await issueService.getAll({ limit: 1000 });
@@ -27,7 +21,11 @@ const MyIssuesHistory = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchIssues();
+  }, [fetchIssues]);
 
   const getStatusColor = (issue) => {
     if (issue.status === 'returned') return 'returned';

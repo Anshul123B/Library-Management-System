@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { bookService } from '../../services/dataService';
 import { FiSearch, FiBook, FiUser, FiMapPin } from 'react-icons/fi';
 import { toast } from 'react-toastify';
@@ -12,7 +12,7 @@ const BrowseBooks = () => {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [categories, setCategories] = useState([]);
 
-  const fetchBooks = async () => {
+  const fetchBooks = useCallback(async () => {
     try {
       setLoading(true);
       const res = await bookService.getAll({ limit: 1000 });
@@ -28,7 +28,7 @@ const BrowseBooks = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, categoryFilter]);
 
   const filterBooks = (booksToFilter, search, category) => {
     let filtered = booksToFilter;
@@ -50,7 +50,7 @@ const BrowseBooks = () => {
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [fetchBooks]);
 
   useEffect(() => {
     filterBooks(books, searchTerm, categoryFilter);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { bookService } from '../../services/dataService';
 import { FiPlus, FiEdit2, FiTrash2, FiSearch, FiX } from 'react-icons/fi';
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ const BookManagement = () => {
   });
   const [currentId, setCurrentId] = useState(null);
 
-  const fetchBooks = async () => {
+  const fetchBooks = useCallback(async () => {
     try {
       setLoading(true);
       const res = await bookService.getAll({ search: searchTerm });
@@ -31,14 +31,14 @@ const BookManagement = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchBooks();
     }, 500);
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+  }, [fetchBooks]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
