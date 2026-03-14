@@ -45,7 +45,7 @@ app.use((req, res) => {
 // Global error handler
 app.use(errorHandler);
 
-// ----- Start Server -----
+// ----- Server Bootstrap -----
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`\n🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
